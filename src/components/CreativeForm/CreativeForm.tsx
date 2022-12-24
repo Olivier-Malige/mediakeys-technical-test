@@ -64,7 +64,7 @@ const CreativeForm = ({
 
         <Grid container spacing={2} alignItems="center">
           {creative.formats.map((format) => (
-            <Grid item>
+            <Grid item key={format}>
               <Chip label={format} color="primary" />
             </Grid>
           ))}

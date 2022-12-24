@@ -56,7 +56,7 @@ Quelques exemples de paramètres fournis par l'API :
 - pagination : `/creatives?_page=:page&_limit=:limit`
 - tri : `/creatives?_sort=lastModified&_order=desc`
 
-*Astuce : pour la pagination, le nombre total d'éléments est présent dans la réponse de l'API*
+_Astuce : pour la pagination, le nombre total d'éléments est présent dans la réponse de l'API_
 
 ## Commandes
 

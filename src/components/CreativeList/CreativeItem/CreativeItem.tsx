@@ -8,14 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
+import { Creative } from "../../../Types/creative";
 
 type CreativeItemProps = {
-  creative: {
-    title: string;
-    users: string[];
-    formats: string[];
-    enabled: boolean;
-  };
+  creative: Creative;
   isLast: boolean;
   isSelected: boolean;
 };
@@ -41,16 +37,20 @@ const CreativeItem = ({ creative, isLast, isSelected }: CreativeItemProps) => {
             </Grid>
             <Grid item xs={3}>
               <div style={{ display: "flex" }}>
-                {creative.users.map((user) => (
-                  <Avatar key={user} style={{ marginLeft: -16 }}>
-                    {user}
+                {creative.contributors.map((user) => (
+                  <Avatar key={user.id} style={{ marginLeft: -16 }}>
+                    {user.firstName[0] + user.lastName[0]}
                   </Avatar>
                 ))}
               </div>
             </Grid>
             <Grid item xs={6}>
               {creative.formats.map((format) => (
-                <Chip style={{ marginRight: 8 }} key={format} label={format} />
+                <Chip
+                  style={{ marginRight: 8 }}
+                  key={format.width + format.height}
+                  label={`${format.width} / ${format.height}`}
+                />
               ))}
             </Grid>
           </Grid>

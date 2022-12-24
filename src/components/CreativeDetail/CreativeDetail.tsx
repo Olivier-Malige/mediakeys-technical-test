@@ -12,24 +12,27 @@ import {
 } from "@mui/material";
 
 import { useNavigate } from "react-router";
+import { RouterPaths } from "../../router/router";
+import { Creative } from "../../Types/creative";
 
 type CreativeDetailProps = {
-  creative: {
-    title: string;
-    users: string[];
-    description: string;
-    content: string;
-    formats: string[];
-    enabled: boolean;
-  };
+  creative: Creative;
 };
 
 const CreativeDetail = ({ creative }: CreativeDetailProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/creative/${creative.title}`);
+    navigate(`${RouterPaths.CREATIVE}/${creative.title}`);
   };
+
+  const lastModifiedLocalDate = new Date(
+    creative.lastModified
+  ).toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <Paper
@@ -48,21 +51,23 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
         <Grid item xs={4}>
           <Paper elevation={0} style={{ padding: 16 }}>
             <Typography paragraph variant="subtitle2">
-              Créé par Francis Nolastname
+              {`Crée par ${creative.createdBy.firstName} ${creative.createdBy.lastName}`}
             </Typography>
             <Typography paragraph variant="subtitle2">
-              Dernière modification le 1 novembre 2021
+              {`Dernière modification le ${lastModifiedLocalDate}`}
             </Typography>
           </Paper>
 
           <Paper elevation={2}>
             <List>
-              {creative.users.map((user) => (
-                <ListItem key={user}>
+              {creative.contributors.map((user) => (
+                <ListItem key={user.id}>
                   <ListItemIcon>
                     <Person />
                   </ListItemIcon>
-                  <ListItemText primary={user} />
+                  <ListItemText
+                    primary={`${user.firstName} ${user.lastName}`}
+                  />
                 </ListItem>
               ))}
             </List>

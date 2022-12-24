@@ -4,28 +4,37 @@ import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 
 import { CreativeItem } from "./CreativeItem/CreativeItem";
+import { Creative } from "../../Types/creative";
+import { Box } from "@mui/material";
 
 type CreativesListProps = {
-  creatives: {
-    title: string;
-    users: string[];
-    formats: string[];
-    enabled: boolean;
-  }[];
+  creatives: Creative[] | undefined;
+  setSelectedCreative: (creative: Creative) => void;
+  selectedCreativeId: string | undefined;
 };
 
-const CreativesList = ({ creatives }: CreativesListProps) => {
+const CreativesList = ({
+  creatives,
+  selectedCreativeId,
+  setSelectedCreative,
+}: CreativesListProps) => {
   return (
     <Paper style={{ padding: 16 }} elevation={8}>
       <List>
-        {creatives.map((creative, index) => (
-          <CreativeItem
-            key={creative.title}
-            creative={creative}
-            isSelected={false}
-            isLast={index === creatives.length - 1}
-          />
-        ))}
+        {creatives &&
+          creatives.map((creative, index) => (
+            <Box
+              sx={{ cursor: "pointer" }}
+              key={creative.id}
+              onClick={() => setSelectedCreative(creative)}
+            >
+              <CreativeItem
+                creative={creative}
+                isSelected={creative.id === selectedCreativeId}
+                isLast={index === creatives.length - 1}
+              />
+            </Box>
+          ))}
       </List>
     </Paper>
   );

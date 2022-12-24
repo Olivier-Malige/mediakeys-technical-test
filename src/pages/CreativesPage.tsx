@@ -1,71 +1,87 @@
-import React from "react";
-import { Pagination } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { CircularProgress, Pagination } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
-
-const creatives = [
-  {
-    title: "Title creative 1",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600"],
-    enabled: true,
-  },
-  {
-    title: "Title creative 2",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600"],
-    enabled: true,
-    description:
-      "Ekkovpu henuheewa mec fikpune likohfu vamuz hifeeta vabhec go oma aggunpo du zocme pu abihoki. Use row hebihcoc sa pujdide bur wubopiek ba okanavgu tegiz wavpop tizu apohup re tuca. Hunu us elecuj opmaba jerrasad eb bicsu zo mepak penbiva usafu mamkala.",
-    content: "Cadiji dohfewwez poroci om suhfop",
-  },
-  {
-    title: "Title creative 3",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600", "43x300", "400x250"],
-    enabled: true,
-  },
-  {
-    title: "Title creative 4",
-    users: ["DE"],
-    formats: ["120x120", "60x600"],
-    enabled: true,
-  },
-  {
-    title: "Title creative 5",
-    users: ["AB", "CD", "EF"],
-    formats: ["120x120", "60x600", "43x300"],
-    enabled: false,
-  },
-];
+import { useQuery } from "react-query";
+import { Creative } from "../Types/creative";
+import { API_PATHS } from "../constants/path";
+import Box from "@mui/system/Box";
 
 const CreativesPage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedCreative, setSelectedCreative] = useState<Creative>();
+
+  const { isLoading, error, data, refetch, isFetching } = useQuery<
+    Creative[],
+    Error
+  >(["creatives"], async () => {
+    const LIMIT = 5;
+    const url = new URL(API_PATHS.creatives);
+    url.searchParams.set("_sort", "lastModified");
+    url.searchParams.set("_order", "desc");
+    url.searchParams.set("_page", currentPage.toString());
+    url.searchParams.set("_limit", LIMIT.toString());
+
+    const res = await axios.get(url.toString());
+    setTotalPages(Math.ceil(Number(res.headers["x-total-count"]) / LIMIT));
+    return res.data;
+  });
+
+  const handlePageChange = (event: any, page: number) => {
+    setSelectedCreative(undefined);
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage, refetch]);
+
+  if (isLoading || isFetching)
+    return (
+      <MainLayout>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            height: "80vh",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={60} />
+        </Box>
+      </MainLayout>
+    );
+
+  if (error) return <MainLayout>An error has occurred: {error} </MainLayout>;
+
   return (
     <MainLayout>
       <Grid container spacing={3} direction={"column"}>
         <Grid item>
-          <CreativesList creatives={creatives} />
+          <CreativesList
+            setSelectedCreative={setSelectedCreative}
+            creatives={data}
+            selectedCreativeId={selectedCreative?.id}
+          />
         </Grid>
         <Grid item>
           <Grid container justifyContent="center">
-            <Pagination count={10} />
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+            />
           </Grid>
         </Grid>
-        <Grid item>
-          <CreativeDetail
-            creative={{
-              title: "Title creative 2",
-              users: ["AB", "CD"],
-              formats: ["120x120", "60x600"],
-              enabled: true,
-              description:
-                "Ekkovpu henuheewa mec fikpune likohfu vamuz hifeeta vabhec go oma aggunpo du zocme pu abihoki. Use row hebihcoc sa pujdide bur wubopiek ba okanavgu tegiz wavpop tizu apohup re tuca. Hunu us elecuj opmaba jerrasad eb bicsu zo mepak penbiva usafu mamkala.",
-              content: "Cadiji dohfewwez poroci om suhfop",
-            }}
-          />
-        </Grid>
+        {selectedCreative && (
+          <Grid item>
+            <CreativeDetail creative={selectedCreative} />
+          </Grid>
+        )}
       </Grid>
     </MainLayout>
   );
