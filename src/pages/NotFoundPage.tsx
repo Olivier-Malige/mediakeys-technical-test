@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { ROUTER_PATHS } from "../constants/path";
 import { MainLayout } from "../layouts/MainLayout";
-import { RouterPaths } from "../router/router";
 
 const NotFoundPage = () => {
   return (
@@ -20,7 +20,7 @@ const NotFoundPage = () => {
         </Grid>
         <Grid item>
           <Grid container justifyContent={"center"}>
-            <Link to={RouterPaths.ROOT}>Return to home</Link>
+            <Link to={ROUTER_PATHS.ROOT}>Return to home</Link>
           </Grid>
         </Grid>
       </Grid>

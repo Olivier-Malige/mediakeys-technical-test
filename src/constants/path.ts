@@ -4,4 +4,9 @@ const API_PATHS = {
   creatives: API_URL + "/creatives",
 };
 
-export { API_PATHS, API_URL };
+enum ROUTER_PATHS {
+  ROOT = "/",
+  CREATIVE = "/creative",
+}
+
+export { API_PATHS, API_URL, ROUTER_PATHS };

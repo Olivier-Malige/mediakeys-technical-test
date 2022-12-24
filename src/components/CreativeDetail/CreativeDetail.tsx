@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 
 import { useNavigate } from "react-router";
-import { RouterPaths } from "../../router/router";
 import { Creative } from "../../Types/creative";
+import { ROUTER_PATHS } from "../../constants/path";
 
 type CreativeDetailProps = {
   creative: Creative;
@@ -23,7 +23,7 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`${RouterPaths.CREATIVE}/${creative.title}`);
+    navigate(`${ROUTER_PATHS.CREATIVE}/${creative.title}`);
   };
 
   const lastModifiedLocalDate = new Date(

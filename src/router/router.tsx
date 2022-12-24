@@ -1,25 +1,21 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import { ROUTER_PATHS } from "../constants/path";
 import { CreativeEditionPage } from "../pages/CreativeEditionPage";
 import { CreativesPage } from "../pages/CreativesPage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 
-enum RouterPaths {
-  ROOT = "/",
-  CREATIVE = "/creative",
-}
-
 const router = createBrowserRouter([
   {
-    path: RouterPaths.ROOT,
+    path: ROUTER_PATHS.ROOT,
     element: <CreativesPage />,
     errorElement: <NotFoundPage />,
   },
   {
-    path: RouterPaths.CREATIVE + "/:id",
+    path: ROUTER_PATHS.CREATIVE + "/:id",
     element: <CreativeEditionPage />,
     errorElement: <NotFoundPage />,
   },
 ]);
 
-export { router, RouterPaths };
+export { router };
