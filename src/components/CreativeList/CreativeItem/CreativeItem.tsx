@@ -14,12 +14,23 @@ type CreativeItemProps = {
   creative: Creative;
   isLast: boolean;
   isSelected: boolean;
+  onEnable: (id: string, enabled: boolean) => void;
 };
 
-const CreativeItem = ({ creative, isLast, isSelected }: CreativeItemProps) => {
+const CreativeItem = ({
+  creative,
+  isLast,
+  isSelected,
+  onEnable,
+}: CreativeItemProps) => {
   return (
     <ListItem
-      secondaryAction={<Switch checked={creative.enabled} />}
+      secondaryAction={
+        <Switch
+          onClick={() => onEnable(creative.id, !creative.enabled)}
+          checked={creative.enabled}
+        />
+      }
       divider={!isLast}
     >
       <ListItemText

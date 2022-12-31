@@ -11,12 +11,14 @@ type CreativesListProps = {
   creatives: Creative[] | undefined;
   setSelectedCreative: (creative: Creative) => void;
   selectedCreativeId: string | undefined;
+  onEnable: (id: string, enabled: boolean) => void;
 };
 
 const CreativesList = ({
   creatives,
   selectedCreativeId,
   setSelectedCreative,
+  onEnable,
 }: CreativesListProps) => {
   return (
     <Paper style={{ padding: 16 }} elevation={8}>
@@ -32,6 +34,7 @@ const CreativesList = ({
                 creative={creative}
                 isSelected={creative.id === selectedCreativeId}
                 isLast={index === creatives.length - 1}
+                onEnable={onEnable}
               />
             </Box>
           ))}

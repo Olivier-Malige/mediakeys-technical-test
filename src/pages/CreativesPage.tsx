@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { Creative } from "../Types/creative";
 import { API_PATHS } from "../constants/path";
 import Box from "@mui/system/Box";
@@ -15,10 +15,12 @@ const CreativesPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCreative, setSelectedCreative] = useState<Creative>();
 
-  const { isLoading, error, data, refetch, isFetching } = useQuery<
-    Creative[],
-    Error
-  >(["creatives"], async () => {
+  const {
+    isLoading: isCreativesLoading,
+    error: creativesError,
+    data: creativesData,
+    refetch,
+  } = useQuery<Creative[], Error>(["creatives"], async () => {
     const LIMIT = 5;
     const url = new URL(API_PATHS.creatives);
     url.searchParams.set("_sort", "lastModified");
@@ -31,16 +33,39 @@ const CreativesPage = () => {
     return res.data;
   });
 
-  const handlePageChange = (event: any, page: number) => {
+  interface EnableCreativeMutationPayload {
+    id: string;
+    enabled: boolean;
+  }
+
+  const enableCreativeMutation = useMutation(
+    (payload: EnableCreativeMutationPayload) => {
+      return axios.patch(`${API_PATHS.creatives}/${payload.id}`, {
+        enabled: payload.enabled,
+      });
+    }
+  );
+
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setSelectedCreative(undefined);
     setCurrentPage(page);
   };
 
+  const handleEnableCreative = (id: string, enabled: boolean) => {
+    enableCreativeMutation.mutate({
+      id,
+      enabled,
+    });
+  };
+
   useEffect(() => {
     refetch();
-  }, [currentPage, refetch]);
+  }, [currentPage, refetch, enableCreativeMutation.isSuccess]);
 
-  if (isLoading || isFetching)
+  if (isCreativesLoading)
     return (
       <MainLayout>
         <Box
@@ -56,7 +81,8 @@ const CreativesPage = () => {
       </MainLayout>
     );
 
-  if (error) return <MainLayout>An error has occurred: {error} </MainLayout>;
+  if (creativesError)
+    return <MainLayout>An error has occurred: {creativesError} </MainLayout>;
 
   return (
     <MainLayout>
@@ -64,8 +90,9 @@ const CreativesPage = () => {
         <Grid item>
           <CreativesList
             setSelectedCreative={setSelectedCreative}
-            creatives={data}
+            creatives={creativesData}
             selectedCreativeId={selectedCreative?.id}
+            onEnable={handleEnableCreative}
           />
         </Grid>
         <Grid item>
