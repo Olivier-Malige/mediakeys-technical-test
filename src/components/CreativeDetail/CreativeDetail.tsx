@@ -23,7 +23,7 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`${ROUTER_PATHS.CREATIVE}/${creative.title}`);
+    navigate(`${ROUTER_PATHS.CREATIVE}/${creative.id}`);
   };
 
   const lastModifiedLocalDate = new Date(

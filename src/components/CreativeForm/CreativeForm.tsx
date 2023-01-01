@@ -10,18 +10,13 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
+import { Creative } from "../../Types/creative";
 
 type CreativeFormProps = {
-  creative: {
-    title: string;
-    description: string;
-    content: string;
-    formats: string[];
-    enabled: boolean;
-  };
-  onSave: () => void;
+  creative: Creative;
+  onSave: (creative: Creative) => void;
   onCancel: () => void;
-  onDelete: () => void;
+  onDelete: (creativeId: string) => void;
 };
 
 const CreativeForm = ({
@@ -64,8 +59,11 @@ const CreativeForm = ({
 
         <Grid container spacing={2} alignItems="center">
           {creative.formats.map((format) => (
-            <Grid item key={format}>
-              <Chip label={format} color="primary" />
+            <Grid item key={format.width + format.height}>
+              <Chip
+                label={format.width + "/" + format.height}
+                color="primary"
+              />
             </Grid>
           ))}
           <Grid item>
@@ -78,7 +76,11 @@ const CreativeForm = ({
 
       <Grid item container spacing={3} justifyContent="center">
         <Grid item>
-          <Button color="primary" variant="contained" onClick={onSave}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => onSave(creative)}
+          >
             Sauvegarder
           </Button>
         </Grid>
@@ -88,7 +90,11 @@ const CreativeForm = ({
           </Button>
         </Grid>
         <Grid item>
-          <Button variant="outlined" color="error" onClick={onDelete}>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => onDelete(creative.id)}
+          >
             Supprimer
           </Button>
         </Grid>
