@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
-import { Creative } from "../Types/creative";
+import { Creative, CreativeFormValues } from "../types/creative";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { API_PATHS, ROUTER_PATHS } from "../constants/path";
@@ -24,7 +24,7 @@ const CreativeEditionPage = () => {
     return res.data;
   });
 
-  const handleSave = (creative: Creative) => {
+  const handleSave = (creative: CreativeFormValues, id: string) => {
     console.log(creative);
     navigate(ROUTER_PATHS.ROOT);
   };

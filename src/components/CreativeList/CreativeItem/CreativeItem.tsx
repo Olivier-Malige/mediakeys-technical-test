@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import { Creative } from "../../../Types/creative";
+import { Creative } from "../../../types/creative";
 
 type CreativeItemProps = {
   creative: Creative;

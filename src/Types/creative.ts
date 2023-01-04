@@ -20,4 +20,11 @@ type Creative = {
   content?: string;
 };
 
-export type { Creative };
+interface CreativeFormValues {
+  title: string;
+  description?: string;
+  content?: string;
+  enabled: boolean;
+}
+
+export type { Creative, CreativeFormValues };

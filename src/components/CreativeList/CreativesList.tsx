@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 
 import { CreativeItem } from "./CreativeItem/CreativeItem";
-import { Creative } from "../../Types/creative";
+import { Creative } from "../../types/creative";
 import { Box } from "@mui/material";
 
 type CreativesListProps = {

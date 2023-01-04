@@ -6,7 +6,7 @@ import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
 import { useMutation, useQuery } from "react-query";
-import { Creative } from "../Types/creative";
+import { Creative } from "../types/creative";
 import { API_PATHS } from "../constants/path";
 import Box from "@mui/system/Box";
 
