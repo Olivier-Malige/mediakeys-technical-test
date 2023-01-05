@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 interface CreativeFormProps {
   creative: Creative;
-  onSave: (creativeFormValues: CreativeFormValues, id: string) => void;
+  onSave: (creative: Creative) => void;
   onCancel: () => void;
   onDelete: (creativeId: string) => void;
 }
@@ -61,7 +61,11 @@ const CreativeForm = ({
   const handleSubmitForm: SubmitHandler<CreativeFormValues> = (
     creativeFormValues
   ) => {
-    onSave(creativeFormValues, creative.id);
+    onSave({
+      ...creative,
+      ...creativeFormValues,
+      lastModified: new Date().toDateString(),
+    });
   };
 
   return (

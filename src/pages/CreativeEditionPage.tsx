@@ -1,7 +1,7 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
-import { Creative, CreativeFormValues } from "../types/creative";
+import { Creative } from "../types/creative";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { API_PATHS, ROUTER_PATHS } from "../constants/path";
@@ -27,9 +27,17 @@ const CreativeEditionPage = () => {
     return axios.delete(url.toString());
   });
 
-  const handleSave = (creative: CreativeFormValues, _id: string) => {
-    console.log(creative);
-    navigate(ROUTER_PATHS.ROOT);
+  const { mutate: saveCreativeMutation } = useMutation((creative: Creative) => {
+    const url = new URL(API_PATHS.creatives + "/" + creative.id);
+    return axios.put(url.toString(), creative);
+  });
+
+  const handleSave = (creative: Creative) => {
+    saveCreativeMutation(creative, {
+      onSuccess: () => {
+        navigate(ROUTER_PATHS.ROOT);
+      },
+    });
   };
 
   const handleDelete = (creativeId: string) => {
