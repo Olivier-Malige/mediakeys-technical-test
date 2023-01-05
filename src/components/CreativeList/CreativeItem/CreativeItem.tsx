@@ -49,7 +49,7 @@ const CreativeItem = ({
               <div style={{ display: "flex" }}>
                 {creative.contributors.map((user) => (
                   <Avatar key={user.id} style={{ marginLeft: -16 }}>
-                    {user.firstName.slice() + user.lastName.slice()}
+                    {`${user.firstName[0]}${user.lastName[0]}`}
                   </Avatar>
                 ))}
               </div>

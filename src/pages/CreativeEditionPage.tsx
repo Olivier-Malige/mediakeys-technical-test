@@ -2,7 +2,7 @@ import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
 import { Creative, CreativeFormValues } from "../types/creative";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { API_PATHS, ROUTER_PATHS } from "../constants/path";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -18,9 +18,13 @@ const CreativeEditionPage = () => {
     data: creativeData,
   } = useQuery<Creative, Error>(["creative"], async () => {
     const url = new URL(API_PATHS.creatives + "/" + id);
-
     const res = await axios.get(url.toString());
     return res.data;
+  });
+
+  const { mutate: deleteCreativeMutation } = useMutation((id: string) => {
+    const url = new URL(API_PATHS.creatives + "/" + id);
+    return axios.delete(url.toString());
   });
 
   const handleSave = (creative: CreativeFormValues, _id: string) => {
@@ -29,7 +33,11 @@ const CreativeEditionPage = () => {
   };
 
   const handleDelete = (creativeId: string) => {
-    console.log(creativeId);
+    deleteCreativeMutation(creativeId, {
+      onSuccess: () => {
+        navigate(ROUTER_PATHS.ROOT);
+      },
+    });
   };
 
   const handleCancel = () => {
