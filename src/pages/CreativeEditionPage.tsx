@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
@@ -24,7 +23,7 @@ const CreativeEditionPage = () => {
     return res.data;
   });
 
-  const handleSave = (creative: CreativeFormValues, id: string) => {
+  const handleSave = (creative: CreativeFormValues, _id: string) => {
     console.log(creative);
     navigate(ROUTER_PATHS.ROOT);
   };

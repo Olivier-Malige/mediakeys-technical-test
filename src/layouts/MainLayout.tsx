@@ -1,6 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import { Container } from "@mui/system";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 type MainLayoutProps = {
   children: ReactNode;

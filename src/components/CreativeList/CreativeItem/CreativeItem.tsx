@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Avatar,
   Chip,
@@ -50,7 +49,7 @@ const CreativeItem = ({
               <div style={{ display: "flex" }}>
                 {creative.contributors.map((user) => (
                   <Avatar key={user.id} style={{ marginLeft: -16 }}>
-                    {user.firstName[0] + user.lastName[0]}
+                    {user.firstName.slice() + user.lastName.slice()}
                   </Avatar>
                 ))}
               </div>

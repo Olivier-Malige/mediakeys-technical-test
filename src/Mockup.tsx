@@ -118,10 +118,10 @@ function Mockup() {
           <Grid container spacing={3}>
             <Grid item xs={8}>
               <Typography variant="h6" paragraph>
-                {creatives[1].title}
+                {creatives[1]?.title}
               </Typography>
-              <Typography paragraph>{creatives[1].description}</Typography>
-              <Typography paragraph>{creatives[1].content}</Typography>
+              <Typography paragraph>{creatives[1]?.description}</Typography>
+              <Typography paragraph>{creatives[1]?.content}</Typography>
             </Grid>
             <Grid item xs={4}>
               <Paper elevation={0} style={{ padding: 16 }}>
@@ -168,7 +168,7 @@ function Mockup() {
               <TextField
                 margin="normal"
                 label="Titre"
-                value={creatives[1].title}
+                value={creatives[1]?.title}
               />
             </Grid>
             <Grid item xs container justifyContent="flex-end">
@@ -184,7 +184,7 @@ function Mockup() {
             multiline
             minRows={3}
             label="Description"
-            value={creatives[1].description}
+            value={creatives[1]?.description}
           />
 
           <TextField
@@ -193,11 +193,11 @@ function Mockup() {
             multiline
             minRows={10}
             label="Contenu"
-            value={creatives[1].content}
+            value={creatives[1]?.content}
           />
 
           <Grid container spacing={2} alignItems="center">
-            {creatives[1].formats.map((format) => (
+            {creatives[1]?.formats.map((format) => (
               <Grid item>
                 <Chip label={format} color="primary" />
               </Grid>
