@@ -9,9 +9,10 @@ import {
   TextField,
 } from "@mui/material";
 import { Creative, CreativeFormValues } from "../../types/creative";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 
 interface CreativeFormProps {
   creative: Creative;
@@ -26,8 +27,8 @@ const schema = yup.object().shape({
     .min(3, "3 caractère min")
     .max(25, "25 caractères max")
     .required("Champ obligatoire"),
-  description: yup.string().max(200, "200 caractères max"),
-  content: yup.string().max(1000, "1000 caractères max"),
+  description: yup.string(),
+  content: yup.string(),
   enabled: yup.boolean(),
 });
 
@@ -40,17 +41,22 @@ const CreativeForm = ({
   const {
     register,
     handleSubmit,
+    control,
+    reset,
     formState: { errors },
   } = useForm<CreativeFormValues>({
-    defaultValues: {
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
+
+  useEffect(() => {
+    reset({
       title: creative.title,
       description: creative.description,
       content: creative.content,
       enabled: creative.enabled,
-    },
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
+    });
+  }, [creative, reset]);
 
   const handleSubmitForm: SubmitHandler<CreativeFormValues> = (
     creativeFormValues
@@ -75,9 +81,15 @@ const CreativeForm = ({
             </Grid>
             <Grid item xs container justifyContent="flex-end">
               <Grid item>
-                <Switch
-                  {...register("enabled")}
-                  defaultChecked={creative.enabled}
+                <Controller
+                  name="enabled"
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <Switch
+                      checked={value}
+                      onChange={(_event, data) => onChange(data)}
+                    />
+                  )}
                 />
               </Grid>
             </Grid>
