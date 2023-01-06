@@ -25,6 +25,12 @@ interface CreativeFormValues {
   description?: string;
   content?: string;
   enabled: boolean;
+  formats: CreativeFormat[];
 }
 
-export type { Creative, CreativeFormValues };
+interface CreativeFormat {
+  width: number;
+  height: number;
+}
+
+export type { Creative, CreativeFormValues, CreativeFormat };
