@@ -6,7 +6,7 @@ import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
 import { useMutation, useQuery } from "react-query";
-import { Creative } from "../Interfaces/creative";
+import { Creative } from "../interfaces/creative";
 import { API_PATHS } from "../constants/path";
 import Box from "@mui/system/Box";
 
@@ -86,30 +86,31 @@ const CreativesPage = () => {
 
   return (
     <MainLayout>
-      <Grid container spacing={3} direction={"column"}>
-        <Grid item>
-          <CreativesList
-            setSelectedCreative={setSelectedCreative}
-            creatives={creativesData}
-            selectedCreativeId={selectedCreative?.id}
-            onEnable={handleEnableCreative}
-          />
-        </Grid>
-        <Grid item>
-          <Grid container justifyContent="center">
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-            />
-          </Grid>
-        </Grid>
-        {selectedCreative && (
-          <Grid item>
-            <CreativeDetail creative={selectedCreative} />
-          </Grid>
-        )}
-      </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+        }}
+      >
+        <CreativesList
+          setSelectedCreative={setSelectedCreative}
+          creatives={creativesData}
+          selectedCreativeId={selectedCreative?.id}
+          onEnable={handleEnableCreative}
+        />
+
+        <Pagination
+          sx={{
+            alignSelf: "center",
+          }}
+          count={totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
+
+        {selectedCreative && <CreativeDetail creative={selectedCreative} />}
+      </Box>
     </MainLayout>
   );
 };

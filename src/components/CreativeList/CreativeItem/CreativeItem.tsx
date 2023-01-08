@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
-import { Creative } from "../../../Interfaces/creative";
+import { Creative } from "../../../interfaces/creative";
 
 type CreativeItemProps = {
   creative: Creative;
@@ -34,30 +34,60 @@ const CreativeItem = ({
     >
       <ListItemText
         primary={
-          <Grid container spacing={1}>
-            <Grid item xs={3}>
+          <Grid
+            container
+            spacing={1}
+            flexDirection={{ md: "row", xs: "column" }}
+          >
+            <Grid
+              item
+              sm={4}
+              sx={{
+                paddingRight: "10px",
+              }}
+            >
               <Typography
                 variant="h6"
                 sx={{
-                  ...(isSelected ? { fontWeight: "bold" } : {}),
+                  ...(isSelected && { fontWeight: "bold" }),
                 }}
               >
                 {creative.title}
               </Typography>
             </Grid>
-            <Grid item xs={3}>
-              <div style={{ display: "flex" }}>
+            <Grid
+              item
+              md={2}
+              sx={{
+                paddingRight: "10px",
+              }}
+            >
+              <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {creative.contributors.map((user) => (
-                  <Avatar key={user.id} style={{ marginLeft: -16 }}>
+                  <Avatar
+                    key={user.id}
+                    sx={{
+                      marginRight: {
+                        xs: -1,
+                        md: -2,
+                      },
+                    }}
+                  >
                     {`${user.firstName[0]}${user.lastName[0]}`}
                   </Avatar>
                 ))}
               </div>
             </Grid>
-            <Grid item xs={6}>
+            <Grid
+              item
+              md={6}
+              sx={{
+                paddingRight: "10px",
+              }}
+            >
               {creative.formats.map((format) => (
                 <Chip
-                  style={{ marginRight: 8 }}
+                  style={{ marginRight: 8, marginBottom: 8 }}
                   key={format.width + format.height}
                   label={`${format.width} / ${format.height}`}
                 />

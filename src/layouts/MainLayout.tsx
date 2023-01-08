@@ -14,12 +14,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
 
   return (
     <>
-      <AppBar
-        sx={{
-          padding: 1,
-        }}
-        position="sticky"
-      >
+      <AppBar position="sticky">
         <Toolbar>
           <img src="/mediakeys.png" width={40} alt="logo" />
           <Box sx={{ flexGrow: 1 }} />

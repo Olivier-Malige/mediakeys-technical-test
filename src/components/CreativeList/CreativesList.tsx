@@ -2,7 +2,7 @@ import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 
 import { CreativeItem } from "./CreativeItem/CreativeItem";
-import { Creative } from "../../Interfaces/creative";
+import { Creative } from "../../interfaces/creative";
 import { Box } from "@mui/material";
 
 type CreativesListProps = {
@@ -19,7 +19,7 @@ const CreativesList = ({
   onEnable,
 }: CreativesListProps) => {
   return (
-    <Paper style={{ padding: 16 }} elevation={8}>
+    <Paper sx={{ padding: 1.2, height: "fit-content" }} elevation={8}>
       <List>
         {creatives &&
           creatives.map((creative, index) => (

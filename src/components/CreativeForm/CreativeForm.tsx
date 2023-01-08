@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { AddFormatFormDialog } from "../AddFormatFormDialog/AddFormatFormDialog";
-import { Creative, CreativeFormValues } from "../../Interfaces/creative";
+import { Creative, CreativeFormValues } from "../../interfaces/creative";
 
 interface CreativeFormProps {
   creative: Creative;
@@ -90,89 +90,102 @@ const CreativeForm = ({
   return (
     <>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
-        <Grid container spacing={3} direction={"column"}>
-          <Paper elevation={8} style={{ padding: 16, marginTop: 30 }}>
-            <Grid container alignItems="center">
-              <Grid item xs={8}>
-                <TextField
-                  margin="normal"
-                  label="Titre"
-                  {...register("title")}
-                  error={!!errors.title}
-                  helperText={errors.title?.message}
-                  required
-                />
+        <Grid container direction={"column"} spacing={3}>
+          <Grid item>
+            <Paper elevation={8} style={{ padding: 16 }}>
+              <Grid container alignItems="center">
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    label="Titre"
+                    {...register("title")}
+                    error={!!errors.title}
+                    helperText={errors.title?.message}
+                    required
+                  />
+                </Grid>
+                <Grid item xs container justifyContent="flex-end">
+                  <Grid item>
+                    <Controller
+                      name="enabled"
+                      control={control}
+                      render={({ field: { value, onChange } }) => (
+                        <Switch
+                          checked={!!value}
+                          onChange={(_event, data) => onChange(data)}
+                        />
+                      )}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item xs container justifyContent="flex-end">
+
+              <TextField
+                margin="normal"
+                fullWidth
+                multiline
+                minRows={3}
+                label="Description"
+                {...register("description")}
+                error={!!errors.description}
+                helperText={errors.description?.message}
+              />
+
+              <TextField
+                margin="normal"
+                fullWidth
+                multiline
+                minRows={10}
+                label="Contenu"
+                {...register("content")}
+                error={!!errors.content}
+                helperText={errors.content?.message}
+              />
+
+              <Grid container spacing={{ xs: 1, sm: 2 }} alignItems="center">
+                {fieldsFormat.map((format, index) => (
+                  <Grid item key={format.width + format.height}>
+                    <Chip
+                      label={format.width + "/" + format.height}
+                      color="primary"
+                      onDelete={() => {
+                        removeFormat(index);
+                      }}
+                    />
+                  </Grid>
+                ))}
                 <Grid item>
-                  <Controller
-                    name="enabled"
-                    control={control}
-                    render={({ field: { value, onChange } }) => (
-                      <Switch
-                        checked={!!value}
-                        onChange={(_event, data) => onChange(data)}
-                      />
-                    )}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <TextField
-              margin="normal"
-              fullWidth
-              multiline
-              minRows={3}
-              label="Description"
-              {...register("description")}
-              error={!!errors.description}
-              helperText={errors.description?.message}
-            />
-
-            <TextField
-              margin="normal"
-              fullWidth
-              multiline
-              minRows={10}
-              label="Contenu"
-              {...register("content")}
-              error={!!errors.content}
-              helperText={errors.content?.message}
-            />
-
-            <Grid container spacing={2} alignItems="center">
-              {fieldsFormat.map((format, index) => (
-                <Grid item key={format.width + format.height}>
-                  <Chip
-                    label={format.width + "/" + format.height}
+                  <IconButton
+                    onClick={() => setOpenAddFormatDialog(true)}
+                    size="small"
                     color="primary"
-                    onDelete={() => {
-                      removeFormat(index);
-                    }}
-                  />
+                  >
+                    <Add />
+                  </IconButton>
                 </Grid>
-              ))}
-              <Grid item>
-                <IconButton
-                  onClick={() => setOpenAddFormatDialog(true)}
-                  size="small"
-                  color="primary"
-                >
-                  <Add />
-                </IconButton>
               </Grid>
-            </Grid>
-          </Paper>
+            </Paper>
+          </Grid>
 
-          <Grid item container spacing={3} justifyContent="center">
+          <Grid
+            item
+            container
+            spacing={{ xs: 2, sm: 3 }}
+            justifyContent="center"
+            direction={{ xs: "column", sm: "row" }}
+          >
             <Grid item>
-              <Button color="primary" variant="contained" type="submit">
+              <Button
+                color="primary"
+                variant="contained"
+                type="submit"
+                fullWidth
+              >
                 Sauvegarder
               </Button>
             </Grid>
             <Grid item>
-              <Button variant="outlined" onClick={onCancel}>
+              <Button variant="outlined" onClick={onCancel} fullWidth>
                 Annuler
               </Button>
             </Grid>
@@ -181,6 +194,7 @@ const CreativeForm = ({
                 variant="outlined"
                 color="error"
                 onClick={() => onDelete(creative.id)}
+                fullWidth
               >
                 Supprimer
               </Button>

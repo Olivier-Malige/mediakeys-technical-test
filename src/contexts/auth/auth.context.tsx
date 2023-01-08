@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { API_PATHS } from "../../constants/path";
 
-import { User } from "../../Interfaces/user";
+import { User } from "../../interfaces/user";
 
 const AuthContext = createContext<{ user: User | null }>({
   user: null,

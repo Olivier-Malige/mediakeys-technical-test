@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import { useNavigate } from "react-router";
-import { Creative } from "../../Interfaces/creative";
+import { Creative } from "../../interfaces/creative";
 import { ROUTER_PATHS } from "../../constants/path";
 
 type CreativeDetailProps = {
@@ -38,16 +38,23 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
       elevation={8}
       onClick={handleClick}
     >
-      <Grid container spacing={3}>
-        <Grid item xs={8}>
+      <Grid container spacing={3} flexDirection={{ md: "row", xs: "column" }}>
+        <Grid item md={8}>
           <Typography variant="h6" paragraph>
             {creative.title}
           </Typography>
           <Typography paragraph>{creative.description}</Typography>
           <Typography paragraph>{creative.content}</Typography>
         </Grid>
-        <Grid item xs={4}>
-          <Paper elevation={0} style={{ padding: 16 }}>
+        <Grid item md={4}>
+          <Paper
+            elevation={0}
+            sx={{
+              md: {
+                padding: 16,
+              },
+            }}
+          >
             <Typography paragraph variant="subtitle2">
               {`Crée par ${creative.createdBy.firstName} ${creative.createdBy.lastName}`}
             </Typography>

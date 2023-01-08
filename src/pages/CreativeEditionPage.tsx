@@ -1,7 +1,7 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
-import { Creative } from "../Interfaces/creative";
+import { Creative } from "../interfaces/creative";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { API_PATHS, ROUTER_PATHS } from "../constants/path";
