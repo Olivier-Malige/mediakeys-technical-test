@@ -1,7 +1,8 @@
 const API_URL = "http://localhost:3001";
 
 const API_PATHS = {
-  creatives: API_URL + "/creatives",
+  CREATIVES: API_URL + "/creatives",
+  USER: API_URL + "/user",
 };
 
 enum ROUTER_PATHS {

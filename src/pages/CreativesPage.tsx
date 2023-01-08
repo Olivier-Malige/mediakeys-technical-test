@@ -6,7 +6,7 @@ import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
 import { useMutation, useQuery } from "react-query";
-import { Creative } from "../types/creative";
+import { Creative } from "../Interfaces/creative";
 import { API_PATHS } from "../constants/path";
 import Box from "@mui/system/Box";
 
@@ -22,7 +22,7 @@ const CreativesPage = () => {
     refetch,
   } = useQuery<Creative[], Error>(["creatives"], async () => {
     const LIMIT = 5;
-    const url = new URL(API_PATHS.creatives);
+    const url = new URL(API_PATHS.CREATIVES);
     url.searchParams.set("_sort", "lastModified");
     url.searchParams.set("_order", "desc");
     url.searchParams.set("_page", currentPage.toString());
@@ -40,7 +40,7 @@ const CreativesPage = () => {
 
   const enableCreativeMutation = useMutation(
     (payload: EnableCreativeMutationPayload) => {
-      return axios.patch(`${API_PATHS.creatives}/${payload.id}`, {
+      return axios.patch(`${API_PATHS.CREATIVES}/${payload.id}`, {
         enabled: payload.enabled,
       });
     }

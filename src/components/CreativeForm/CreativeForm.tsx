@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { AddFormatFormDialog } from "../AddFormatFormDialog/AddFormatFormDialog";
-import { Creative, CreativeFormValues } from "../../types/creative";
+import { Creative, CreativeFormValues } from "../../Interfaces/creative";
 
 interface CreativeFormProps {
   creative: Creative;
@@ -32,7 +32,7 @@ const schema = yup.object().shape({
   title: yup
     .string()
     .min(3, "3 caractère min")
-    .max(25, "25 caractères max")
+    .max(40, "40 caractères max")
     .required("Champ obligatoire"),
   description: yup.string(),
   content: yup.string(),

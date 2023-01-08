@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import { useNavigate } from "react-router";
-import { Creative } from "../../types/creative";
+import { Creative } from "../../Interfaces/creative";
 import { ROUTER_PATHS } from "../../constants/path";
 
 type CreativeDetailProps = {
