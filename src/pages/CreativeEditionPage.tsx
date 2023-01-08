@@ -3,10 +3,10 @@ import { CreativeForm } from "../components/CreativeForm/CreativeForm";
 import { MainLayout } from "../layouts/MainLayout";
 import { Creative } from "../interfaces/creative";
 import { useMutation, useQuery } from "react-query";
-import axios from "axios";
-import { API_PATHS, ROUTER_PATHS } from "../constants/path";
+import { ROUTER_PATHS } from "../constants/path";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { deleteCreative, getCreative, updateCreative } from "../api/creatives";
 
 const CreativeEditionPage = () => {
   const { id } = useParams();
@@ -17,23 +17,24 @@ const CreativeEditionPage = () => {
     error: creativeError,
     data: creativeData,
   } = useQuery<Creative, Error>(["creative"], async () => {
-    const url = new URL(API_PATHS.CREATIVES + "/" + id);
-    const res = await axios.get(url.toString());
-    return res.data;
+    if (!id) {
+      return;
+    }
+    return getCreative(id);
   });
 
   const { mutate: deleteCreativeMutation } = useMutation((id: string) => {
-    const url = new URL(API_PATHS.CREATIVES + "/" + id);
-    return axios.delete(url.toString());
+    return deleteCreative(id);
   });
 
-  const { mutate: saveCreativeMutation } = useMutation((creative: Creative) => {
-    const url = new URL(API_PATHS.CREATIVES + "/" + creative.id);
-    return axios.put(url.toString(), creative);
-  });
+  const { mutate: updateCreativeMutation } = useMutation(
+    (creative: Creative) => {
+      return updateCreative(creative);
+    }
+  );
 
   const handleSave = (creative: Creative) => {
-    saveCreativeMutation(creative, {
+    updateCreativeMutation(creative, {
       onSuccess: () => {
         navigate(ROUTER_PATHS.ROOT);
       },

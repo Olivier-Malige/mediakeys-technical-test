@@ -1,7 +1,6 @@
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { API_PATHS } from "../../constants/path";
+import { getAuthUser } from "../../api/user";
 
 import { User } from "../../interfaces/user";
 
@@ -12,9 +11,8 @@ const AuthContext = createContext<{ user: User | null }>({
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const { data } = useQuery<User, Error>(["user"], async () => {
-    const res = await axios.get(API_PATHS.USER);
-    return res.data;
+  const { data } = useQuery<User, Error>(["user"], () => {
+    return getAuthUser();
   });
 
   useEffect(() => {

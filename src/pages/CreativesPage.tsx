@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { CircularProgress, Pagination } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import { CreativesList } from "../components/CreativeList/CreativesList";
 import { CreativeDetail } from "../components/CreativeDetail/CreativeDetail";
 import { MainLayout } from "../layouts/MainLayout";
 import { useMutation, useQuery } from "react-query";
 import { Creative } from "../interfaces/creative";
-import { API_PATHS } from "../constants/path";
 import Box from "@mui/system/Box";
+import { enableCreative, getCreatives } from "../api/creatives";
 
 const CreativesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,16 +19,9 @@ const CreativesPage = () => {
     data: creativesData,
     refetch,
   } = useQuery<Creative[], Error>(["creatives"], async () => {
-    const LIMIT = 5;
-    const url = new URL(API_PATHS.CREATIVES);
-    url.searchParams.set("_sort", "lastModified");
-    url.searchParams.set("_order", "desc");
-    url.searchParams.set("_page", currentPage.toString());
-    url.searchParams.set("_limit", LIMIT.toString());
-
-    const res = await axios.get(url.toString());
-    setTotalPages(Math.ceil(Number(res.headers["x-total-count"]) / LIMIT));
-    return res.data;
+    const { creatives, totalPages } = await getCreatives(currentPage);
+    setTotalPages(totalPages);
+    return creatives;
   });
 
   interface EnableCreativeMutationPayload {
@@ -40,9 +31,7 @@ const CreativesPage = () => {
 
   const enableCreativeMutation = useMutation(
     (payload: EnableCreativeMutationPayload) => {
-      return axios.patch(`${API_PATHS.CREATIVES}/${payload.id}`, {
-        enabled: payload.enabled,
-      });
+      return enableCreative(payload.id, payload.enabled);
     }
   );
 
