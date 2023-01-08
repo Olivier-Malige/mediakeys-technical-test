@@ -1,16 +1,11 @@
+import { Contributor, User } from "./user";
+
 interface Creative {
   id: string;
   lastModified: string;
   title: string;
-  contributors: {
-    id: string;
-    firstName: string;
-    lastName: string;
-  }[];
-  createdBy: {
-    firstName: string;
-    lastName: string;
-  };
+  contributors: Contributor[];
+  createdBy: User;
   formats: CreativeFormat[];
   enabled: boolean;
   description?: string;

@@ -3,4 +3,8 @@ interface User {
   lastName: string;
 }
 
-export type { User };
+interface Contributor extends User {
+  id: string;
+}
+
+export type { User, Contributor };

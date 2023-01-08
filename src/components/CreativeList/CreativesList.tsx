@@ -5,7 +5,7 @@ import { CreativeItem } from "./CreativeItem/CreativeItem";
 import { Creative } from "../../interfaces/creative";
 import { Box } from "@mui/material";
 
-type CreativesListProps = {
+export type CreativesListProps = {
   creatives: Creative[] | undefined;
   setSelectedCreative: (creative: Creative) => void;
   selectedCreativeId: string | undefined;

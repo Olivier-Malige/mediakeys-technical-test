@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAuthUser } from "../../api/user";
@@ -8,7 +9,11 @@ const AuthContext = createContext<{ user: User | null }>({
   user: null,
 });
 
-const AuthProvider: React.FC = ({ children }) => {
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
   const { data } = useQuery<User, Error>(["user"], () => {

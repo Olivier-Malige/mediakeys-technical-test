@@ -9,12 +9,12 @@ import {
 import ListItem from "@mui/material/ListItem";
 import { Creative } from "../../../interfaces/creative";
 
-type CreativeItemProps = {
+export interface CreativeItemProps {
   creative: Creative;
   isLast: boolean;
   isSelected: boolean;
   onEnable: (id: string, enabled: boolean) => void;
-};
+}
 
 const CreativeItem = ({
   creative,
@@ -24,8 +24,10 @@ const CreativeItem = ({
 }: CreativeItemProps) => {
   return (
     <ListItem
+      data-testid={`creative-item-${creative.id}`}
       secondaryAction={
         <Switch
+          data-testid="active-switch"
           onClick={() => onEnable(creative.id, !creative.enabled)}
           checked={creative.enabled}
         />
@@ -63,8 +65,9 @@ const CreativeItem = ({
               }}
             >
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {creative.contributors.map((user) => (
+                {creative.contributors.map((user, index) => (
                   <Avatar
+                    data-testid={`avatar-${index}`}
                     key={user.id}
                     sx={{
                       marginRight: {
@@ -85,8 +88,9 @@ const CreativeItem = ({
                 paddingRight: "10px",
               }}
             >
-              {creative.formats.map((format) => (
+              {creative.formats.map((format, index) => (
                 <Chip
+                  data-testid={`format-${index}`}
                   style={{ marginRight: 8, marginBottom: 8 }}
                   key={format.width + format.height}
                   label={`${format.width} / ${format.height}`}

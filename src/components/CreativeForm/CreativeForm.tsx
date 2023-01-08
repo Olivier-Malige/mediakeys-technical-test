@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { AddFormatFormDialog } from "../AddFormatFormDialog/AddFormatFormDialog";
 import { Creative, CreativeFormValues } from "../../interfaces/creative";
 
-interface CreativeFormProps {
+export interface CreativeFormProps {
   creative: Creative;
   onSave: (creative: Creative) => void;
   onCancel: () => void;
@@ -102,6 +102,7 @@ const CreativeForm = ({
                     error={!!errors.title}
                     helperText={errors.title?.message}
                     required
+                    data-testid="title-input"
                   />
                 </Grid>
                 <Grid item xs container justifyContent="flex-end">
@@ -113,6 +114,7 @@ const CreativeForm = ({
                         <Switch
                           checked={!!value}
                           onChange={(_event, data) => onChange(data)}
+                          data-testid="active-switch"
                         />
                       )}
                     />
@@ -129,6 +131,7 @@ const CreativeForm = ({
                 {...register("description")}
                 error={!!errors.description}
                 helperText={errors.description?.message}
+                data-testid="description-input"
               />
 
               <TextField
@@ -140,6 +143,7 @@ const CreativeForm = ({
                 {...register("content")}
                 error={!!errors.content}
                 helperText={errors.content?.message}
+                data-testid="content-input"
               />
 
               <Grid container spacing={{ xs: 1, sm: 2 }} alignItems="center">
@@ -151,6 +155,7 @@ const CreativeForm = ({
                       onDelete={() => {
                         removeFormat(index);
                       }}
+                      data-testid="format-chip"
                     />
                   </Grid>
                 ))}
@@ -180,12 +185,18 @@ const CreativeForm = ({
                 variant="contained"
                 type="submit"
                 fullWidth
+                data-testid="save-creative-button"
               >
                 Sauvegarder
               </Button>
             </Grid>
             <Grid item>
-              <Button variant="outlined" onClick={onCancel} fullWidth>
+              <Button
+                variant="outlined"
+                onClick={onCancel}
+                fullWidth
+                data-testid="cancel-creative-button"
+              >
                 Annuler
               </Button>
             </Grid>
@@ -195,6 +206,7 @@ const CreativeForm = ({
                 color="error"
                 onClick={() => onDelete(creative.id)}
                 fullWidth
+                data-testid="delete-creative-button"
               >
                 Supprimer
               </Button>

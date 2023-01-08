@@ -13,7 +13,7 @@ import { useNavigate } from "react-router";
 import { Creative } from "../../interfaces/creative";
 import { ROUTER_PATHS } from "../../constants/path";
 
-type CreativeDetailProps = {
+export type CreativeDetailProps = {
   creative: Creative;
 };
 
@@ -40,11 +40,15 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
     >
       <Grid container spacing={3} flexDirection={{ md: "row", xs: "column" }}>
         <Grid item md={8}>
-          <Typography variant="h6" paragraph>
+          <Typography variant="h6" paragraph data-testid={"creative-title"}>
             {creative.title}
           </Typography>
-          <Typography paragraph>{creative.description}</Typography>
-          <Typography paragraph>{creative.content}</Typography>
+          <Typography paragraph data-testid={"creative-description"}>
+            {creative.description}
+          </Typography>
+          <Typography paragraph data-testid={"creative-content"}>
+            {creative.content}
+          </Typography>
         </Grid>
         <Grid item md={4}>
           <Paper
@@ -55,10 +59,18 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
               },
             }}
           >
-            <Typography paragraph variant="subtitle2">
+            <Typography
+              paragraph
+              variant="subtitle2"
+              data-testid="creative-createdBy"
+            >
               {`Crée par ${creative.createdBy.firstName} ${creative.createdBy.lastName}`}
             </Typography>
-            <Typography paragraph variant="subtitle2">
+            <Typography
+              paragraph
+              variant="subtitle2"
+              data-testid="creative-lastModified"
+            >
               {`Dernière modification le ${lastModifiedLocalDate}`}
             </Typography>
           </Paper>
@@ -66,7 +78,7 @@ const CreativeDetail = ({ creative }: CreativeDetailProps) => {
           <Paper elevation={2}>
             <List>
               {creative.contributors.map((user) => (
-                <ListItem key={user.id}>
+                <ListItem key={user.id} data-testid={"creative-contributor"}>
                   <ListItemIcon>
                     <Person />
                   </ListItemIcon>
