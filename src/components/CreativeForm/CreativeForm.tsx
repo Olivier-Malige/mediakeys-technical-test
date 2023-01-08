@@ -8,7 +8,7 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
-import { Creative, CreativeFormValues } from "../../types/creative";
+
 import {
   Controller,
   SubmitHandler,
@@ -19,6 +19,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { AddFormatFormDialog } from "../AddFormatFormDialog/AddFormatFormDialog";
+import { Creative, CreativeFormValues } from "../../types/creative";
 
 interface CreativeFormProps {
   creative: Creative;
@@ -109,7 +110,7 @@ const CreativeForm = ({
                     control={control}
                     render={({ field: { value, onChange } }) => (
                       <Switch
-                        checked={value}
+                        checked={!!value}
                         onChange={(_event, data) => onChange(data)}
                       />
                     )}

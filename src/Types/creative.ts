@@ -1,4 +1,4 @@
-type Creative = {
+interface Creative {
   id: string;
   lastModified: string;
   title: string;
@@ -11,14 +11,11 @@ type Creative = {
     firstName: string;
     lastName: string;
   };
-  formats: {
-    width: number;
-    height: number;
-  }[];
+  formats: CreativeFormat[];
   enabled: boolean;
   description?: string;
   content?: string;
-};
+}
 
 interface CreativeFormValues {
   title: string;
