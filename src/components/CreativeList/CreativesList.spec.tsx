@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Creative } from '../../interfaces/creative';
+import { Creative } from '../../types/creative';
 import { CreativesList, CreativesListProps } from './CreativesList';
 
 const testCreative1: Creative = {

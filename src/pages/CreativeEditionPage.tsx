@@ -1,7 +1,7 @@
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { CreativeForm } from '../components/CreativeForm/CreativeForm';
 import { MainLayout } from '../layouts/MainLayout';
-import { Creative } from '../interfaces/creative';
+import { Creative } from '../types/creative';
 import { useMutation, useQuery } from 'react-query';
 import { ROUTER_PATHS } from '../constants/path';
 import CircularProgress from '@mui/material/CircularProgress';

@@ -1,5 +1,5 @@
 import { act, render, screen, waitFor, fireEvent } from '@testing-library/react';
-import { Creative } from '../../interfaces/creative';
+import { Creative } from '../../types/creative';
 import { CreativeForm, CreativeFormProps } from './CreativeForm';
 
 const testCreative: Creative = {

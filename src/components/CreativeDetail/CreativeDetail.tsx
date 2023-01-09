@@ -2,7 +2,7 @@ import { Person } from '@mui/icons-material';
 import { Grid, List, ListItem, ListItemIcon, ListItemText, Paper, Typography } from '@mui/material';
 
 import { useNavigate } from 'react-router';
-import { Creative } from '../../interfaces/creative';
+import { Creative } from '../../types/creative';
 import { ROUTER_PATHS } from '../../constants/path';
 
 export type CreativeDetailProps = {

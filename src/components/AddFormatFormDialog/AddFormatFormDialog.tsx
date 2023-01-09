@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { CreativeFormat } from '../../interfaces/creative';
+import { CreativeFormat } from '../../types/creative';
 
 const schema = yup.object().shape({
   width: yup.number().positive().required(),

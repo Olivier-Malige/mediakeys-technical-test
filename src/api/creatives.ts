@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_PATHS } from '../constants/path';
-import { Creative } from '../interfaces/creative';
+import { Creative } from '../types/creative';
 
 async function getCreatives(currentPage: number, limit: number = 5) {
   const url = new URL(API_PATHS.CREATIVES);

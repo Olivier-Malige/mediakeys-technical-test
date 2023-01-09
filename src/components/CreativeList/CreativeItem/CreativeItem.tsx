@@ -1,6 +1,6 @@
 import { Avatar, Chip, Grid, ListItemText, Switch, Typography } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
-import { Creative } from '../../../interfaces/creative';
+import { Creative } from '../../../types/creative';
 
 export interface CreativeItemProps {
   creative: Creative;

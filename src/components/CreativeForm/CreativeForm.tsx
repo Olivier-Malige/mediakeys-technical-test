@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { AddFormatFormDialog } from '../AddFormatFormDialog/AddFormatFormDialog';
-import { Creative, CreativeFormValues } from '../../interfaces/creative';
+import { Creative, CreativeFormValues } from '../../types/creative';
 
 export interface CreativeFormProps {
   creative: Creative;

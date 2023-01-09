@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Creative } from '../../interfaces/creative';
+import { Creative } from '../../types/creative';
 import { CreativeDetail, CreativeDetailProps } from './CreativeDetail';
 
 const testCreative: Creative = {

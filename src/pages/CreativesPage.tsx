@@ -4,7 +4,7 @@ import { CreativesList } from '../components/CreativeList/CreativesList';
 import { CreativeDetail } from '../components/CreativeDetail/CreativeDetail';
 import { MainLayout } from '../layouts/MainLayout';
 import { useMutation, useQuery } from 'react-query';
-import { Creative } from '../interfaces/creative';
+import { Creative } from '../types/creative';
 import Box from '@mui/system/Box';
 import { enableCreative, getCreatives } from '../api/creatives';
 
