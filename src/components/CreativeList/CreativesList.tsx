@@ -1,9 +1,9 @@
-import List from "@mui/material/List";
-import Paper from "@mui/material/Paper";
+import List from '@mui/material/List';
+import Paper from '@mui/material/Paper';
 
-import { CreativeItem } from "./CreativeItem/CreativeItem";
-import { Creative } from "../../interfaces/creative";
-import { Box } from "@mui/material";
+import { CreativeItem } from './CreativeItem/CreativeItem';
+import { Creative } from '../../interfaces/creative';
+import { Box } from '@mui/material';
 
 export type CreativesListProps = {
   creatives: Creative[] | undefined;
@@ -12,22 +12,13 @@ export type CreativesListProps = {
   onEnable: (id: string, enabled: boolean) => void;
 };
 
-const CreativesList = ({
-  creatives,
-  selectedCreativeId,
-  setSelectedCreative,
-  onEnable,
-}: CreativesListProps) => {
+const CreativesList = ({ creatives, selectedCreativeId, setSelectedCreative, onEnable }: CreativesListProps) => {
   return (
-    <Paper sx={{ padding: 1.2, height: "fit-content" }} elevation={8}>
+    <Paper sx={{ padding: 1.2, height: 'fit-content' }} elevation={8}>
       <List>
         {creatives &&
           creatives.map((creative, index) => (
-            <Box
-              sx={{ cursor: "pointer" }}
-              key={creative.id}
-              onClick={() => setSelectedCreative(creative)}
-            >
+            <Box sx={{ cursor: 'pointer' }} key={creative.id} onClick={() => setSelectedCreative(creative)}>
               <CreativeItem
                 creative={creative}
                 isSelected={creative.id === selectedCreativeId}

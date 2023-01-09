@@ -1,12 +1,12 @@
-import { useParams, Navigate, useNavigate } from "react-router-dom";
-import { CreativeForm } from "../components/CreativeForm/CreativeForm";
-import { MainLayout } from "../layouts/MainLayout";
-import { Creative } from "../interfaces/creative";
-import { useMutation, useQuery } from "react-query";
-import { ROUTER_PATHS } from "../constants/path";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { deleteCreative, getCreative, updateCreative } from "../api/creatives";
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { CreativeForm } from '../components/CreativeForm/CreativeForm';
+import { MainLayout } from '../layouts/MainLayout';
+import { Creative } from '../interfaces/creative';
+import { useMutation, useQuery } from 'react-query';
+import { ROUTER_PATHS } from '../constants/path';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { deleteCreative, getCreative, updateCreative } from '../api/creatives';
 
 const CreativeEditionPage = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const CreativeEditionPage = () => {
     isLoading: isCreativeLoading,
     error: creativeError,
     data: creativeData,
-  } = useQuery<Creative, Error>(["creative"], async () => {
+  } = useQuery<Creative, Error>(['creative'], async () => {
     if (!id) {
       return;
     }
@@ -27,11 +27,9 @@ const CreativeEditionPage = () => {
     return deleteCreative(id);
   });
 
-  const { mutate: updateCreativeMutation } = useMutation(
-    (creative: Creative) => {
-      return updateCreative(creative);
-    }
-  );
+  const { mutate: updateCreativeMutation } = useMutation((creative: Creative) => {
+    return updateCreative(creative);
+  });
 
   const handleSave = (creative: Creative) => {
     updateCreativeMutation(creative, {
@@ -58,10 +56,10 @@ const CreativeEditionPage = () => {
       <MainLayout>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            height: "80vh",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'center',
+            height: '80vh',
+            alignItems: 'center',
           }}
         >
           <CircularProgress size={60} />
@@ -76,12 +74,7 @@ const CreativeEditionPage = () => {
 
   return (
     <MainLayout>
-      <CreativeForm
-        creative={creativeData}
-        onCancel={handleCancel}
-        onDelete={handleDelete}
-        onSave={handleSave}
-      />
+      <CreativeForm creative={creativeData} onCancel={handleCancel} onDelete={handleDelete} onSave={handleSave} />
     </MainLayout>
   );
 };

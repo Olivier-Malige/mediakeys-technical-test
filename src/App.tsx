@@ -1,8 +1,8 @@
-import { RouterProvider } from "react-router";
-import { router } from "./router/router";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { AuthProvider } from "./contexts/auth/auth.context";
+import { RouterProvider } from 'react-router';
+import { router } from './router/router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { AuthProvider } from './contexts/auth/auth.context';
 
 const queryClient = new QueryClient();
 

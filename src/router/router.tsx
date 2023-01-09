@@ -1,8 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
-import { ROUTER_PATHS } from "../constants/path";
-import { CreativeEditionPage } from "../pages/CreativeEditionPage";
-import { CreativesPage } from "../pages/CreativesPage";
-import { NotFoundPage } from "../pages/NotFoundPage";
+import { createBrowserRouter } from 'react-router-dom';
+import { ROUTER_PATHS } from '../constants/path';
+import { CreativeEditionPage } from '../pages/CreativeEditionPage';
+import { CreativesPage } from '../pages/CreativesPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: ROUTER_PATHS.CREATIVE + "/:id",
+    path: ROUTER_PATHS.CREATIVE + '/:id',
     element: <CreativeEditionPage />,
     errorElement: <NotFoundPage />,
   },

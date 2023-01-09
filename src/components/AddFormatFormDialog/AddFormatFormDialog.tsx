@@ -1,13 +1,13 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Dialog, DialogActions } from "@mui/material";
-import Button from "@mui/material/Button";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { CreativeFormat } from "../../interfaces/creative";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Dialog, DialogActions } from '@mui/material';
+import Button from '@mui/material/Button';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { CreativeFormat } from '../../interfaces/creative';
 
 const schema = yup.object().shape({
   width: yup.number().positive().required(),
@@ -20,11 +20,7 @@ type AddFormatFormDialogProps = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
-const AddFormatFormDialog = ({
-  onSubmit,
-  open,
-  setIsOpen,
-}: AddFormatFormDialogProps) => {
+const AddFormatFormDialog = ({ onSubmit, open, setIsOpen }: AddFormatFormDialogProps) => {
   const { handleSubmit, register, formState } = useForm<CreativeFormat>({
     resolver: yupResolver(schema),
   });
@@ -43,10 +39,10 @@ const AddFormatFormDialog = ({
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <DialogTitle>Ajouter un format</DialogTitle>
         <DialogContent>
-          <Grid container padding={1} spacing={3} direction={"column"}>
+          <Grid container padding={1} spacing={3} direction={'column'}>
             <Grid item>
               <TextField
-                {...register("width")}
+                {...register('width')}
                 label="width"
                 type="number"
                 required
@@ -56,7 +52,7 @@ const AddFormatFormDialog = ({
             </Grid>
             <Grid item>
               <TextField
-                {...register("height")}
+                {...register('height')}
                 label="height"
                 type="number"
                 required

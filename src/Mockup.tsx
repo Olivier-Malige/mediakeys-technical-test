@@ -13,41 +13,41 @@ import {
   Switch,
   TextField,
   Typography,
-} from "@mui/material";
-import { Add, Person } from "@mui/icons-material";
+} from '@mui/material';
+import { Add, Person } from '@mui/icons-material';
 
 const creatives = [
   {
-    title: "Title creative 1",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600"],
+    title: 'Title creative 1',
+    users: ['AB', 'CD'],
+    formats: ['120x120', '60x600'],
     enabled: true,
   },
   {
-    title: "Title creative 2",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600"],
+    title: 'Title creative 2',
+    users: ['AB', 'CD'],
+    formats: ['120x120', '60x600'],
     enabled: true,
     description:
-      "Ekkovpu henuheewa mec fikpune likohfu vamuz hifeeta vabhec go oma aggunpo du zocme pu abihoki. Use row hebihcoc sa pujdide bur wubopiek ba okanavgu tegiz wavpop tizu apohup re tuca. Hunu us elecuj opmaba jerrasad eb bicsu zo mepak penbiva usafu mamkala.",
-    content: "Cadiji dohfewwez poroci om suhfop",
+      'Ekkovpu henuheewa mec fikpune likohfu vamuz hifeeta vabhec go oma aggunpo du zocme pu abihoki. Use row hebihcoc sa pujdide bur wubopiek ba okanavgu tegiz wavpop tizu apohup re tuca. Hunu us elecuj opmaba jerrasad eb bicsu zo mepak penbiva usafu mamkala.',
+    content: 'Cadiji dohfewwez poroci om suhfop',
   },
   {
-    title: "Title creative 3",
-    users: ["AB", "CD"],
-    formats: ["120x120", "60x600", "43x300", "400x250"],
+    title: 'Title creative 3',
+    users: ['AB', 'CD'],
+    formats: ['120x120', '60x600', '43x300', '400x250'],
     enabled: true,
   },
   {
-    title: "Title creative 4",
-    users: ["DE"],
-    formats: ["120x120", "60x600"],
+    title: 'Title creative 4',
+    users: ['DE'],
+    formats: ['120x120', '60x600'],
     enabled: true,
   },
   {
-    title: "Title creative 5",
-    users: ["AB", "CD", "EF"],
-    formats: ["120x120", "60x600", "43x300"],
+    title: 'Title creative 5',
+    users: ['AB', 'CD', 'EF'],
+    formats: ['120x120', '60x600', '43x300'],
     enabled: false,
   },
 ];
@@ -60,10 +60,7 @@ function Mockup() {
         <Paper style={{ padding: 16 }} elevation={8}>
           <List>
             {creatives.map((creative, index) => (
-              <ListItem
-                secondaryAction={<Switch checked={creative.enabled} />}
-                divider={index < creatives.length - 1}
-              >
+              <ListItem secondaryAction={<Switch checked={creative.enabled} />} divider={index < creatives.length - 1}>
                 <ListItemText
                   primary={
                     <Grid container spacing={1}>
@@ -71,14 +68,14 @@ function Mockup() {
                         <Typography
                           variant="h6"
                           style={{
-                            ...(index === 1 ? { fontWeight: "bold" } : {}),
+                            ...(index === 1 ? { fontWeight: 'bold' } : {}),
                           }}
                         >
                           {creative.title}
                         </Typography>
                       </Grid>
                       <Grid item xs={3}>
-                        <div style={{ display: "flex" }}>
+                        <div style={{ display: 'flex' }}>
                           {creative.users.map((user) => (
                             <Avatar key={user} style={{ marginLeft: -16 }}>
                               {user}
@@ -88,11 +85,7 @@ function Mockup() {
                       </Grid>
                       <Grid item xs={6}>
                         {creative.formats.map((format) => (
-                          <Chip
-                            style={{ marginRight: 8 }}
-                            key={format}
-                            label={format}
-                          />
+                          <Chip style={{ marginRight: 8 }} key={format} label={format} />
                         ))}
                       </Grid>
                     </Grid>
@@ -165,11 +158,7 @@ function Mockup() {
         <Paper elevation={8} style={{ padding: 16 }}>
           <Grid container alignItems="center">
             <Grid item xs={8}>
-              <TextField
-                margin="normal"
-                label="Titre"
-                value={creatives[1]?.title}
-              />
+              <TextField margin="normal" label="Titre" value={creatives[1]?.title} />
             </Grid>
             <Grid item xs container justifyContent="flex-end">
               <Grid item>
@@ -187,14 +176,7 @@ function Mockup() {
             value={creatives[1]?.description}
           />
 
-          <TextField
-            margin="normal"
-            fullWidth
-            multiline
-            minRows={10}
-            label="Contenu"
-            value={creatives[1]?.content}
-          />
+          <TextField margin="normal" fullWidth multiline minRows={10} label="Contenu" value={creatives[1]?.content} />
 
           <Grid container spacing={2} alignItems="center">
             {creatives[1]?.formats.map((format) => (

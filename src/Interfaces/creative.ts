@@ -1,4 +1,4 @@
-import { Contributor, User } from "./user";
+import { Contributor, User } from './user';
 
 interface Creative {
   id: string;

@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-import { createContext, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { getAuthUser } from "../../api/user";
+import { ReactNode } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { getAuthUser } from '../../api/user';
 
-import { User } from "../../interfaces/user";
+import { User } from '../../interfaces/user';
 
 const AuthContext = createContext<{ user: User | null }>({
   user: null,
@@ -16,7 +16,7 @@ interface AuthProviderProps {
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
-  const { data } = useQuery<User, Error>(["user"], () => {
+  const { data } = useQuery<User, Error>(['user'], () => {
     return getAuthUser();
   });
 
