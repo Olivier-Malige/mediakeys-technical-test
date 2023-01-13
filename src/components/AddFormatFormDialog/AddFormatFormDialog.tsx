@@ -21,17 +21,19 @@ type AddFormatFormDialogProps = {
 };
 
 const AddFormatFormDialog = ({ onSubmit, open, setIsOpen }: AddFormatFormDialogProps) => {
-  const { handleSubmit, register, formState } = useForm<CreativeFormat>({
+  const { handleSubmit, register, formState, reset } = useForm<CreativeFormat>({
     resolver: yupResolver(schema),
   });
 
   const handleSubmitForm: SubmitHandler<CreativeFormat> = (creativeFormat) => {
     onSubmit(creativeFormat);
     setIsOpen(false);
+    reset();
   };
 
   const handleClose = () => {
     setIsOpen(false);
+    reset();
   };
 
   return (
